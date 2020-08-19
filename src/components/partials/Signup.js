@@ -26,6 +26,20 @@ class Signup extends Component {
                 onSubmit={(e) => {
                   e.preventDefault();
                   if (this.props.socket) {
+                    let empty = 0;
+                    Object.keys(this.state).map((key) => {
+                      if (this.state[key] === "") {
+                        empty += 1;
+                      }
+                    });
+
+                    if (empty > 0) {
+                      return this.setState({ error: "All Fields Required" });
+                    } else {
+                      if (this.state.password !== this.state.passwordAgain) {
+                        return this.setState({ error: "Passwords Must Match" });
+                      }
+                    }
                     this.props.socket.send(
                       JSON.stringify({
                         type: "SIGNUP",
@@ -41,6 +55,9 @@ class Signup extends Component {
                 <p>
                   Already have an account? <Link to="/singup">Login</Link>
                 </p>
+                {this.state.error ? (
+                  <p className="text-danger">{this.state.error}</p>
+                ) : null}
                 <div className="row">
                   <div className="col-md-6">
                     <div className="form-group">
@@ -92,7 +109,7 @@ class Signup extends Component {
                     <div className="form-group">
                       <label>Password</label>
                       <input
-                        type="text"
+                        type="password"
                         className="form-control"
                         placeholder="Password"
                         value={this.state.password}
@@ -106,10 +123,10 @@ class Signup extends Component {
                     <div className="form-group">
                       <label>Password Again</label>
                       <input
-                        type="text"
+                        type="password"
                         className="form-control"
                         placeholder="Password"
-                        value={this.state.password}
+                        value={this.state.passwordAgain}
                         onChange={(e) =>
                           this.setState({ passwordAgain: e.target.value })
                         }
