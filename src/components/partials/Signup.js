@@ -46,6 +46,8 @@ class Signup extends Component {
                         data: {
                           email: this.state.email,
                           password: this.state.password,
+                          name: this.state.name,
+                          username: this.state.username,
                         },
                       })
                     );
@@ -53,7 +55,7 @@ class Signup extends Component {
                 }}
               >
                 <p>
-                  Already have an account? <Link to="/singup">Login</Link>
+                  Already have an account? <Link to="/signup">Login</Link>
                 </p>
                 {this.state.error ? (
                   <p className="text-danger">{this.state.error}</p>
