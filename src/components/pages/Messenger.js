@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 import { withRouter, Link } from "react-router-dom";
 import Sidebar from "../partials/Sidebar";
 import ThreadView from "../partials/ThreadView";
+import ChatInput from "../partials/ChatInput";
 
 class Messenger extends Component {
   render() {
@@ -10,6 +11,7 @@ class Messenger extends Component {
       <div className="messenger-container">
         <Sidebar />
         <ThreadView />
+        <ChatInput />
       </div>
     );
   }
