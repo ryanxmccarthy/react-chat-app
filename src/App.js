@@ -3,6 +3,7 @@ import { BrowserRouter, Switch, Route, Redirect } from "react-router-dom";
 import { connect } from "react-redux";
 import * as ChatActions from "./store/actions/chatActions";
 import * as AuthActions from "./store/actions/authActions";
+import Messenger from "./components/pages/Messenger";
 import Auth from "./components/pages/Auth";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./assets/css/swag.css";
@@ -49,10 +50,17 @@ class App extends React.Component {
             <Route
               path="/"
               render={(props) => {
+                return <Messenger />;
+              }}
+            ></Route>
+
+            <Route
+              path="/:threadId"
+              render={(props) => {
                 if (!this.props.token) {
                   return <Redirect to="/login" />;
                 } else {
-                  return <h1>Root</h1>;
+                  return <Messenger />;
                 }
               }}
             ></Route>
