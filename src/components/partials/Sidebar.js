@@ -3,9 +3,35 @@ import { connect } from "react-redux";
 import { withRouter, Link } from "react-router-dom";
 
 class Sidebar extends Component {
+  state = {
+    search: "",
+  };
+
+  search = () => {
+    this.props.chat.socket.send(
+      JSON.stringify({
+        type: "SEARCH",
+        data: this.state.search,
+      })
+    );
+  };
+
   render() {
     return (
       <div className="sidebar">
+        <div className="search-container">
+          <input
+            className="form-control"
+            placeholder="Search..."
+            value={this.state.search}
+            onChange={(e) => {
+              this.setState({ search: e.target.value });
+            }}
+          />
+          <button className="btn btn-primary" onClick={(e) => this.search()}>
+            Search
+          </button>
+        </div>
         <ul className="thread-list">
           <label>Messages</label>
           <li>
