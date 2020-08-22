@@ -8,7 +8,7 @@ class Sidebar extends Component {
   };
 
   search = () => {
-    this.props.chat.socket.send(
+    this.props.socket.send(
       JSON.stringify({
         type: "SEARCH",
         data: this.state.search,
@@ -32,6 +32,9 @@ class Sidebar extends Component {
             Search
           </button>
         </div>
+        {this.state.search ?
+        
+      : }
         <ul className="thread-list">
           <label>Messages</label>
           <li>
